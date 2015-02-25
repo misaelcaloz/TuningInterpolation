@@ -32,90 +32,106 @@ from functions import *
 #------------ input data
 rootFileName=sys.argv[1]
 
-datafileTDAC2 = sys.argv[2]
-datafileTDAC4 = sys.argv[3]
-datafileTDAC6 = sys.argv[4]
-datafileTDAC9 = sys.argv[5]
-datafileTDAC11 = sys.argv[6]
-datafileTDAC14 = sys.argv[7]
+#datafileTDAC2 = sys.argv[2]
+#datafileTDAC4 = sys.argv[3]
+#datafileTDAC6 = sys.argv[4]
+#datafileTDAC9 = sys.argv[5]
+#datafileTDAC11 = sys.argv[6]
+#datafileTDAC14 = sys.argv[7]
 
-dataTDAC2 = open(datafileTDAC2)
-dataTDAC4 = open(datafileTDAC4)
-dataTDAC6 = open(datafileTDAC6)
-dataTDAC9 = open(datafileTDAC9)
-dataTDAC11 = open(datafileTDAC11)
-dataTDAC14 = open(datafileTDAC14)
+#dataTDAC2 = open(datafileTDAC2)
+#dataTDAC4 = open(datafileTDAC4)
+#dataTDAC6 = open(datafileTDAC6)
+#dataTDAC9 = open(datafileTDAC9)
+#dataTDAC11 = open(datafileTDAC11)
+#dataTDAC14 = open(datafileTDAC14)
 
-dataTDAC_dic = {"dataTDAC4": 2,
-				"dataTDAC4": 4,
-                "dataTDAC6": 6,
-                "dataTDAC6": 9,
-                "dataTDAC6": 11,
-                "dataTDAC6": 14
-                }
+#dataTDAC_dic = {"dataTDAC4": 2,
+#				"dataTDAC4": 4,
+#                "dataTDAC6": 6,
+#                "dataTDAC6": 9,
+#                "dataTDAC6": 11,
+#                "dataTDAC6": 14
+#                }
 			
-FileTDAC_list = [sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6],sys.argv[7]]
-TDAC_list = [2,4,6,9,11,14]
+FileTDAC_list = [sys.argv[2],sys.argv[3],sys.argv[4],sys.argv[5],sys.argv[6]]
+#TDAC_list = [10,8,7,6]
+#TDAC_list = [6,7,8,10,12]
+TDAC_list = [9,8,7,5,3]
 
 #-------- conversion factor injection -> electrons
 
-injToElectrons=1660./.39			# WARNING: different depending the version of the chip: v2: 1660/0.39 v4: 1660/0.25
+injToElectrons=1660./.25			# WARNING: different depending the version of the chip: v2: 1660/0.39 v4: 1660/0.25
 
 # ----------- Target threshold
 
-target_threshold = 700.
+target_threshold = 300.
 
 #------------ create file.root
 
+
+	
+
+
 outFile=TFile(rootFileName,"RECREATE")
 
-TDAC2Dir = outFile.mkdir("TDAC 2")
-graphDirTDAC2 = TDAC2Dir.mkdir("Graphs")
-FailFitDirTDAC2 = TDAC2Dir.mkdir("Fail_fit")
-highThreshDirTDAC2 = TDAC2Dir.mkdir("High_thresh")
-highSigmaDirTDAC2 = TDAC2Dir.mkdir("High_sigma")
-PlotsTDAC2Dir = TDAC2Dir.mkdir("Plots")
-
-TDAC4Dir = outFile.mkdir("TDAC 4")
-graphDirTDAC4 = TDAC4Dir.mkdir("Graphs")
-FailFitDirTDAC4 = TDAC4Dir.mkdir("Fail_fit")
-highThreshDirTDAC4 = TDAC4Dir.mkdir("High_thresh")
-highSigmaDirTDAC4 = TDAC4Dir.mkdir("High_sigma")
-PlotsTDAC4Dir = TDAC4Dir.mkdir("Plots")
-
-TDAC6Dir = outFile.mkdir("TDAC 6")
-graphDirTDAC6 = TDAC6Dir.mkdir("Graphs")
-FailFitDirTDAC6 = TDAC6Dir.mkdir("Fail_fit")
-highThreshDirTDAC6 = TDAC6Dir.mkdir("High_thresh")
-highSigmaDirTDAC6 = TDAC6Dir.mkdir("High_sigma")
-PlotsTDAC6Dir = TDAC6Dir.mkdir("Plots")
-
-TDAC9Dir = outFile.mkdir("TDAC 9")
-graphDirTDAC9 = TDAC9Dir.mkdir("Graphs")
-FailFitDirTDAC9 = TDAC9Dir.mkdir("Fail_fit")
-highThreshDirTDAC9 = TDAC9Dir.mkdir("High_thresh")
-highSigmaDirTDAC9 = TDAC9Dir.mkdir("High_sigma")
-PlotsTDAC9Dir = TDAC9Dir.mkdir("Plots")
-
-TDAC11Dir = outFile.mkdir("TDAC 11")
-graphDirTDAC11 = TDAC11Dir.mkdir("Graphs")
-FailFitDirTDAC11 = TDAC11Dir.mkdir("Fail_fit")
-highThreshDirTDAC11 = TDAC11Dir.mkdir("High_thresh")
-highSigmaDirTDAC11 = TDAC11Dir.mkdir("High_sigma")
-PlotsTDAC11Dir = TDAC11Dir.mkdir("Plots")
-
-TDAC14Dir = outFile.mkdir("TDAC 14")
-graphDirTDAC14 = TDAC14Dir.mkdir("Graphs")
-FailFitDirTDAC14 = TDAC14Dir.mkdir("Fail_fit")
-highThreshDirTDAC14 = TDAC14Dir.mkdir("High_thresh")
-highSigmaDirTDAC14 = TDAC14Dir.mkdir("High_sigma")
-PlotsTDAC14Dir = TDAC14Dir.mkdir("Plots")
-
+for i in TDAC_list:
+	TDACdir = outFile.mkdir("TDAC"+str(i)+"")
+	graphDir = TDACdir.mkdir("Graphs") # TODO: en rajouter
+		
+	
+	
+	
+	
+#
+#
+#TDAC9Dir = outFile.mkdir("TDAC "+str(TDAC_list[0])+"")
+#graphDirTDAC9 = TDAC9Dir.mkdir("Graphs")
+#FailFitDirTDAC9 = TDAC9Dir.mkdir("Fail_fit")
+#highThreshDirTDAC9 = TDAC9Dir.mkdir("High_thresh")
+#highSigmaDirTDAC9 = TDAC9Dir.mkdir("High_sigma")
+#PlotsTDAC9Dir = TDAC9Dir.mkdir("Plots")
+#
+#TDAC4Dir = outFile.mkdir("TDAC "+str(TDAC_list[1])+"")
+#graphDirTDAC4 = TDAC4Dir.mkdir("Graphs")
+#FailFitDirTDAC4 = TDAC4Dir.mkdir("Fail_fit")
+#highThreshDirTDAC4 = TDAC4Dir.mkdir("High_thresh")
+#highSigmaDirTDAC4 = TDAC4Dir.mkdir("High_sigma")
+#PlotsTDAC4Dir = TDAC4Dir.mkdir("Plots")
+#
+#TDAC6Dir = outFile.mkdir("TDAC 6")
+#graphDirTDAC6 = TDAC6Dir.mkdir("Graphs")
+#FailFitDirTDAC6 = TDAC6Dir.mkdir("Fail_fit")
+#highThreshDirTDAC6 = TDAC6Dir.mkdir("High_thresh")
+#highSigmaDirTDAC6 = TDAC6Dir.mkdir("High_sigma")
+#PlotsTDAC6Dir = TDAC6Dir.mkdir("Plots")
+#
+#TDAC9Dir = outFile.mkdir("TDAC 9")
+#graphDirTDAC9 = TDAC9Dir.mkdir("Graphs")
+#FailFitDirTDAC9 = TDAC9Dir.mkdir("Fail_fit")
+#highThreshDirTDAC9 = TDAC9Dir.mkdir("High_thresh")
+#highSigmaDirTDAC9 = TDAC9Dir.mkdir("High_sigma")
+#PlotsTDAC9Dir = TDAC9Dir.mkdir("Plots")
+#
+#TDAC11Dir = outFile.mkdir("TDAC 11")
+#graphDirTDAC11 = TDAC11Dir.mkdir("Graphs")
+#FailFitDirTDAC11 = TDAC11Dir.mkdir("Fail_fit")
+#highThreshDirTDAC11 = TDAC11Dir.mkdir("High_thresh")
+#highSigmaDirTDAC11 = TDAC11Dir.mkdir("High_sigma")
+#PlotsTDAC11Dir = TDAC11Dir.mkdir("Plots")
+#
+#TDAC14Dir = outFile.mkdir("TDAC 14")
+#graphDirTDAC14 = TDAC14Dir.mkdir("Graphs")
+#FailFitDirTDAC14 = TDAC14Dir.mkdir("Fail_fit")
+#highThreshDirTDAC14 = TDAC14Dir.mkdir("High_thresh")
+#highSigmaDirTDAC14 = TDAC14Dir.mkdir("High_sigma")
+#PlotsTDAC14Dir = TDAC14Dir.mkdir("Plots")
+#
 PlotsDir = outFile.mkdir("TDACsuggestion")
 PixelsDir = PlotsDir.mkdir("Pixels")
-FailThrDir = PlotsDir.mkdir("Failing thresh")
-HighThrDic = PlotsDir.mkdir("High threshold")
-GoodPixDic = PlotsDir.mkdir("Good pixels")
+#FailThrDir = PlotsDir.mkdir("Failing thresh")
+#HighThrDic = PlotsDir.mkdir("High threshold")
+#GoodPixDic = PlotsDir.mkdir("Good pixels")
 
 Pix1Dic = PlotsDir.mkdir("0 point")
 Pix1Dic = PlotsDir.mkdir("1 point")
@@ -123,18 +139,18 @@ Pix2Dic = PlotsDir.mkdir("2 points")
 Pix3Dic = PlotsDir.mkdir("3 points")
 Pix4Dic = PlotsDir.mkdir("4 points")
 Pix5Dic = PlotsDir.mkdir("5 points")
-Pix6Dic = PlotsDir.mkdir("6 points")
+#Pix6Dic = PlotsDir.mkdir("6 points")
 
-PixWarning6points = Pix6Dic.mkdir("Warning")
-PixGood6points = Pix6Dic.mkdir("Good pixels")
-
+#PixWarning6points = Pix6Dic.mkdir("Warning")
+#PixGood6points = Pix6Dic.mkdir("Good pixels")
 
 AllThresh_dic = {}
 AllSigma_dic = {}
 AllChi2_dic = {}
 
+lenTDAClist = len(TDAC_list)+2
 
-for n, TDACcnt in zip(range(2,8), TDAC_list):
+for n, TDACcnt in zip(range(2,lenTDAClist), TDAC_list):
 	FileDataThrScan = sys.argv[n]
 		
 	# -------- Reset dictionaries and lists
@@ -151,7 +167,7 @@ for n, TDACcnt in zip(range(2,8), TDAC_list):
 	
 	# -------- Fill dictionaries with function AnalyseThresholdScan() in functions.pyc
 
-	DIC_AnalyseThresholdScan = AnalyseThresholdScan(FileDataThrScan)
+	DIC_AnalyseThresholdScan = AnalyseThresholdScanV4(FileDataThrScan)
 
 	TDAC_value_dic = DIC_AnalyseThresholdScan[0]
 	Threshold_value_dic = DIC_AnalyseThresholdScan[1]
@@ -164,39 +180,42 @@ for n, TDACcnt in zip(range(2,8), TDAC_list):
 	# -------- Set histograms and fitting function
 
 	myfit = TF1("myfit", "[0]+0.5*TMath::Erf([1]*([2]+x))",-1.,3000.)
-	TDAC2D = TH2F("TDAC2D", "TDAC 2D plot;#Row;#Column;Threshold [e]",24,0,24, 36,12,48)
+	TDAC2D = TH2F("TDAC2D", "TDAC 2D plot;#Row;#Column;Threshold [e]",12,0,12, 24,24,48)
 	TDAC1D = TH1F("TDACDist", "TDAC distribution;Threshold [e];nb of pixels", 16,0, 16)
-	thresh2D = TH2F("thresh2D", "Threshold 2D plot;#Row;#Column;Threshold [e]",24,0,24, 36,12,48)
+	thresh2D = TH2F("thresh2D", "Threshold 2D plot;#Row;#Column;Threshold [e]",12,0,12, 24,24,48)
 	thresh1D = TH1F("threshDist", "Threshold distribution;Threshold [e];nb of pixels", 300,-.1, 4000)
-	sigma2D = TH2F("sigma2D", "Sigma 2D plot;#Row;#Column;Sigma [e]",24,0,24, 36,12,48)
+	sigma2D = TH2F("sigma2D", "Sigma 2D plot;#Row;#Column;Sigma [e]",12,0,12, 24,24,48)
 	sigma1D = TH1F("sigmaDist", "Sigma distribution;Sigma [e];nb of pixels", 300,-.1, 500)
 	chi2_1D = TH1F("chi2Dist", "Chi2 distribution; ;nb of pixels", 300,0, 1)
-	chi2_2D = TH2F("chi2_2D", "Chi2 2D plot;#Row;#Column;chi2",24,0,24, 36,12,48)
+	chi2_2D = TH2F("chi2_2D", "Chi2 2D plot;#Row;#Column;chi2",12,0,12, 24,24,48)
 	correlation = TH2F("correlation", "Threshold vs TDAC;TDAC;Threshold [e]",16,0,16, 50,0,2000)
 	eyeDiagram = TH2D("eyeDiagram","S-curves eye diagram;injection [e];Probe",69*2/3,0,0.69*injToElectrons*2/3,128,0,1.5) 
 		
 	
 	
-	if n == 2:
-		TDAC2Dir.cd("Graphs")
+	outFile.cd("TDAC"+str(TDACcnt)+"/Graphs")
 	
-	elif n == 3:
-		TDAC4Dir.cd("Graphs")
-	
-	elif n == 4:
-		TDAC6Dir.cd("Graphs")
-	
-	elif n == 5:
-		TDAC9Dir.cd("Graphs")
-	
-	elif n == 6:
-		TDAC11Dir.cd("Graphs")
-
-	elif n == 7:
-		TDAC14Dir.cd("Graphs")
-	
-	else: 
-		print 'ERROR'
+#	
+#	if n == 2:
+#		outFile.cd("TDAC9/Graphs")
+#	
+#	elif n == 3:
+#		TDAC4Dir.cd("Graphs")
+#	
+#	elif n == 4:
+#		TDAC6Dir.cd("Graphs")
+#	
+#	elif n == 5:
+#		TDAC9Dir.cd("Graphs")
+#	
+#	elif n == 6:
+#		TDAC11Dir.cd("Graphs")
+#
+#	elif n == 7:
+#		TDAC14Dir.cd("Graphs")
+#	
+#	else: 
+#		print 'ERROR'
 		
 		
 	CanvScurves = TCanvas("S-curves_all")
@@ -205,8 +224,8 @@ for n, TDACcnt in zip(range(2,8), TDAC_list):
 	CanvScurves.cd()
 
 	cnt = 0
-	for r in range(24):
-		for c in range(12,48):
+	for r in range(12):
+		for c in range(24,48):
 			graph = Scurve_plot_dic["r"+str(r)+"_c"+str(c)+""]
 			Xaxis = graph.GetXaxis()
 			Xaxis.SetLimits(0,2000)
@@ -226,8 +245,8 @@ for n, TDACcnt in zip(range(2,8), TDAC_list):
 	gPad.Update()
 	# ------- Create histograms
 
-	for r in range(24):
-		for c in range(12,48):
+	for r in range(12):
+		for c in range(24,48):
 			TDAC_value = TDAC_value_dic["r"+str(r)+"_c"+str(c)+""]
 			Threshold_value = Threshold_value_dic["r"+str(r)+"_c"+str(c)+""]
 			Sigma_value = Sigma_value_dic["r"+str(r)+"_c"+str(c)+""]
@@ -273,8 +292,8 @@ for n, TDACcnt in zip(range(2,8), TDAC_list):
 	thresh2D.SetTitleOffset(1.3,"z")
 
 	thresh2D.SetAxisRange(-1,1500.,"Z")
-	thresh2D.GetXaxis().SetNdivisions(32)
-	thresh2D.GetYaxis().SetNdivisions(64)
+	thresh2D.GetXaxis().SetNdivisions(16)
+	thresh2D.GetYaxis().SetNdivisions(32)
 	thresh2D.SetLabelSize(0.02,"X")
 	thresh2D.SetLabelSize(0.02,"Y")
 	thresh2D.GetZaxis().SetLabelSize(0.025)
@@ -329,13 +348,13 @@ for n, TDACcnt in zip(range(2,8), TDAC_list):
 	TDAC2D.Draw("sametext")
 	TDAC2D.SetMarkerSize(0.9)
 	list_TLine=[]
-	for i in range(0,25):
-		line_vert =  TLine(i,12,i,48)
+	for i in range(0,13):
+		line_vert =  TLine(i,24,i,48)
 		line_vert.Draw()
 		list_TLine.append(line_vert)
 
-	for i in range(12,49):
-		line_hor =  TLine(0,i,24,i)
+	for i in range(24,49):
+		line_hor =  TLine(0,i,12,i)
 		line_hor.Draw()
 		list_TLine.append(line_hor)
 		
@@ -359,27 +378,30 @@ for n, TDACcnt in zip(range(2,8), TDAC_list):
 
 	# ------- Write plots 
 
-	if n == 2:
-		TDAC2Dir.cd()
-	
-	elif n == 3:
-		TDAC4Dir.cd()
-	
-	elif n == 4:
-		TDAC6Dir.cd()
-	
-	elif n == 5:
-		TDAC9Dir.cd()
-	
-	elif n == 6:
-		TDAC11Dir.cd()
+	outFile.cd("TDAC"+str(TDACcnt)+"")
 
-	elif n == 7:
-		TDAC14Dir.cd()
-	
-	else: 
-		print 'ERROR'
-		
+
+#	if n == 2:
+#		TDAC9Dir.cd()
+#	
+#	elif n == 3:
+#		TDAC4Dir.cd()
+#	
+#	elif n == 4:
+#		TDAC6Dir.cd()
+#	
+#	elif n == 5:
+#		TDAC9Dir.cd()
+#	
+#	elif n == 6:
+#		TDAC11Dir.cd()
+#
+#	elif n == 7:
+#		TDAC14Dir.cd()
+#	
+#	else: 
+#		print 'ERROR'
+#		
 		
 	thresh1D.Write()
 	thresh2D.Write()
@@ -423,30 +445,50 @@ for n, TDACcnt in zip(range(2,8), TDAC_list):
 # Define function to set TDAC value and create a .txt file 
 
 
-file_TDAC = open("suggested_TDACfileTuningInterpolation.txt", "w")  # "r" instead of "w" in order to take the original suggested_TDACfile as an input instead of create TDACfile with all 6
+file_TDAC = open("suggested_TDACfileTuningInterpolation402.txt", "w")  # "r" instead of "w" in order to take the original suggested_TDACfile as an input instead of create TDACfile with all 6
 
 file_TDAC_list = []
 lineNum_TDAC=0
 
 for counter in range(1,1441): # old way: create a TDAC all 6 file and modify it
 	if counter < 289:
-		file_TDAC_list.append(15)
+		file_TDAC_list.append(0)
 	elif 288 < counter < 1153:
-		file_TDAC_list.append(6)
+		file_TDAC_list.append(0)
 	elif counter > 1152:
-		file_TDAC_list.append(15)
+		file_TDAC_list.append(0)
 
 # Define function to set the TDAC
 
+#def setTDAC(CMOSrow,CMOScol,newTDAC_value):
+#	counter2=0
+#	for i in range(60) :
+#		for j in range(24):
+#			if j==CMOSrow and i==CMOScol:
+#				file_TDAC_list[counter2]=newTDAC_value
+#			counter2 += 1
+#
+#def setTDAC(CMOSrow,CMOScol,newTDAC_value):
+#	counter2=0
+#	for i in range(120):
+#		for j in range(12):
+#			if j==CMOSrow and i==CMOScol:
+#				file_TDAC_list[counter2]=newTDAC_value
+#			counter2 += 1
+
 def setTDAC(CMOSrow,CMOScol,newTDAC_value):
-	counter2=0
-	for i in range(60) :
-		for j in range(24):
-			if j==CMOSrow and i==CMOScol:
-				file_TDAC_list[counter2]=newTDAC_value
-			counter2 += 1
+	cnt = 576
+	for c in range(24,48):
+		for r in range(12):
+			if r == CMOSrow and c == CMOScol:
+				file_TDAC_list[cnt] = newTDAC_value
+				print "c = ", c , "r = ",r, " cnt = ", cnt, " TDAC = ", newTDAC_value
+#			else:
+#				print "row and column not found"
+			cnt += 1
+		cnt += 12
 
-
+	
 
 # Initialize all dictionaries and lists just to be sure
 
@@ -463,7 +505,7 @@ DIC_AnalyseTDACThresholdScansV2 = {}
 
 # Call function to suggest TDAC
 	
-DIC_AnalyseTDACThresholdScansV2 = AnalyseTDACThresholdScansV2(FileTDAC_list,TDAC_list,target_threshold)	
+DIC_AnalyseTDACThresholdScansV2 = AnalyseTDACThresholdScansV2V4(FileTDAC_list,TDAC_list,target_threshold)	
 
 AllThresh_dic = DIC_AnalyseTDACThresholdScansV2[0]
 AllSigma_dic = DIC_AnalyseTDACThresholdScansV2[1]
@@ -479,14 +521,14 @@ AllThresh_simpl_dic = DIC_AnalyseTDACThresholdScansV2[8]
 
 PlotsDir.cd("Pixels")
 
-Sugg_TDAC2D = TH2F("Sugg_TDAC2D", "Suggested TDAC 2D plot;#Row;#Column;TDAC value",24,0,24, 36,12,48)
+Sugg_TDAC2D = TH2F("Sugg_TDAC2D", "Suggested TDAC 2D plot;#Row;#Column;TDAC value",12,0,12, 24,24,48)
 Sugg_TDAC1D = TH1F("Sugg_TDACDist", "Suggested TDAC distribution;TDAC value;nb of pixels", 16,0, 16)
-Exp_thresh2D = TH2F("Exp_thresh2D", "Expected Threshold 2D plot;#Row;#Column;Threshold [e]",24,0,24, 36,12,48)
+Exp_thresh2D = TH2F("Exp_thresh2D", "Expected Threshold 2D plot;#Row;#Column;Threshold [e]",12,0,12, 24,24,48)
 Exp_thresh1D = TH1F("Exp_threshDist", "Expected Threshold distribution;Threshold [e];nb of pixels", 300,-.1, 4000)
 points6Warning2D = TH2F("points6Warning", "Warning pixels location;#Row;#Column;Threshold [e]",24,0,24, 36,12,48)
 
-for r in range(24):
-	for c in range(12,48):
+for r in range(12):
+	for c in range(24,48):
 	
 		PlotsDir.cd("Pixels")
 		graph = AllThr_vs_TDAC_graphs_dic["r"+str(r)+"_c"+str(c)+""]
@@ -543,8 +585,9 @@ for r in range(24):
 
 outFile.cd("TDACsuggestion")
 
-for r in range(24):
-	for c in range(12,48):
+
+for c in range(24,48):
+	for r in range(12):
 		Exp_thresh_value = AllExpectThresh_dic["r"+str(r)+"_c"+str(c)+""]
 		Sugg_TDAC_value = AllSuggTDAC_dic ["r"+str(r)+"_c"+str(c)+""]
 		
@@ -554,6 +597,45 @@ for r in range(24):
 		Sugg_TDAC2D.Fill(r,c,Sugg_TDAC_value)
 		
 		# Set TDAC value for each pixel
+		
+		# VERSION 4 ISSUE ----------------------------
+#		
+#		if Sugg_TDAC_value == 0:
+#			Sugg_TDAC_value = 15
+#		if Sugg_TDAC_value == 1:
+#			Sugg_TDAC_value = 14
+#		if Sugg_TDAC_value == 2:
+#			Sugg_TDAC_value = 13
+#		if Sugg_TDAC_value == 3:
+#			Sugg_TDAC_value = 12
+#		if Sugg_TDAC_value == 4:
+#			Sugg_TDAC_value = 11
+#		if Sugg_TDAC_value == 5:
+#			Sugg_TDAC_value = 10
+#		if Sugg_TDAC_value == 6:
+#			Sugg_TDAC_value = 9
+#		if Sugg_TDAC_value == 7:
+#			Sugg_TDAC_value = 8
+#		if Sugg_TDAC_value == 8:
+#			Sugg_TDAC_value = 7
+#		if Sugg_TDAC_value == 9:
+#			Sugg_TDAC_value = 6
+#		if Sugg_TDAC_value == 10:
+#			Sugg_TDAC_value = 5
+#		if Sugg_TDAC_value == 11:
+#			Sugg_TDAC_value = 4
+#		if Sugg_TDAC_value == 12:
+#			Sugg_TDAC_value = 3
+#		if Sugg_TDAC_value == 13:
+#			Sugg_TDAC_value = 2
+#		if Sugg_TDAC_value == 14:
+#			Sugg_TDAC_value = 1
+#		if Sugg_TDAC_value == 15:
+#			Sugg_TDAC_value = 0
+#			
+#		
+		
+		# VERSION 4 ISSUE ----------------------------
 		
 		setTDAC(r,c,Sugg_TDAC_value)
 		
@@ -572,8 +654,8 @@ Exp_thresh2D.SetTitleSize(0.025,"xyz")
 Exp_thresh2D.SetTitleOffset(1.3,"z")
 
 Exp_thresh2D.SetAxisRange(-1,1500.,"Z")
-Exp_thresh2D.GetXaxis().SetNdivisions(32)
-Exp_thresh2D.GetYaxis().SetNdivisions(64)
+Exp_thresh2D.GetXaxis().SetNdivisions(16)
+Exp_thresh2D.GetYaxis().SetNdivisions(32)
 Exp_thresh2D.SetLabelSize(0.02,"X")
 Exp_thresh2D.SetLabelSize(0.02,"Y")
 Exp_thresh2D.GetZaxis().SetLabelSize(0.025)
@@ -590,8 +672,8 @@ Sugg_TDAC2D.SetTitleSize(0.025,"xyz")
 Sugg_TDAC2D.SetTitleOffset(1.3,"z")
 
 #Sugg_TDAC2D.SetAxisRange(-1,1500.,"Z")
-Sugg_TDAC2D.GetXaxis().SetNdivisions(32)
-Sugg_TDAC2D.GetYaxis().SetNdivisions(64)
+Sugg_TDAC2D.GetXaxis().SetNdivisions(16)
+Sugg_TDAC2D.GetYaxis().SetNdivisions(32)
 Sugg_TDAC2D.SetLabelSize(0.02,"X")
 Sugg_TDAC2D.SetLabelSize(0.02,"Y")
 Sugg_TDAC2D.GetZaxis().SetLabelSize(0.025)
@@ -610,8 +692,8 @@ Sugg_TDAC1D.SetAxisRange(-1,16,"X")
 points6Warning2D.SetTitleSize(0.025,"xyz")
 points6Warning2D.SetTitleOffset(1.3,"z")
 
-points6Warning2D.GetXaxis().SetNdivisions(32)
-points6Warning2D.GetYaxis().SetNdivisions(64)
+points6Warning2D.GetXaxis().SetNdivisions(16)
+points6Warning2D.GetYaxis().SetNdivisions(32)
 points6Warning2D.SetLabelSize(0.02,"X")
 points6Warning2D.SetLabelSize(0.02,"Y")
 points6Warning2D.GetZaxis().SetLabelSize(0.025)
@@ -632,96 +714,96 @@ Sugg_TDAC2D.Write()
 points6Warning2D.Write()
 	
 	
-	
-
-#CanvGraphPix = TCanvas 
-
-GraphWarning = TGraph()
-GraphWarning.SetPoint(0,0,857)
-GraphWarning.SetPoint(1,1,925)
-GraphWarning.SetPoint(2,2,1054)
-GraphWarning.SetPoint(3,3,1128)
-GraphWarning.SetPoint(4,4,1214)
-GraphWarning.SetPoint(5,5,1294)
-GraphWarning.SetPoint(6,6,1433)
-GraphWarning.SetPoint(7,7,1500)
-GraphWarning.SetPoint(8,8,854)
-GraphWarning.SetPoint(9,9,930)
-GraphWarning.SetPoint(10,10,853)
-GraphWarning.SetPoint(11,11,1130)
-GraphWarning.SetPoint(12,12,1215)
-GraphWarning.SetPoint(13,13,1294)
-GraphWarning.SetPoint(14,14,1430)
-GraphWarning.SetPoint(15,15,1517)
-
-Xaxis = GraphWarning.GetXaxis()
-Xaxis.SetLimits(0.,16.)
-GraphWarning.GetHistogram().SetMaximum(2000.)
-GraphWarning.GetHistogram().SetMinimum(0.)
-
-GraphWarning.Draw("AC*")
-outFile.cd()
-GraphWarning.Write()
-
-GraphWarning2 = TGraph()
-GraphWarning2.SetPoint(0,0,849)
-GraphWarning2.SetPoint(1,1,925)
-GraphWarning2.SetPoint(2,2,1020)
-GraphWarning2.SetPoint(3,3,1094)
-GraphWarning2.SetPoint(4,4,1225)
-GraphWarning2.SetPoint(5,5,1300)
-GraphWarning2.SetPoint(6,6,1406)
-GraphWarning2.SetPoint(7,7,1500)
-GraphWarning2.SetPoint(8,8,850)
-GraphWarning2.SetPoint(9,9,925)
-GraphWarning2.SetPoint(10,10,1019)
-GraphWarning2.SetPoint(11,11,1097)
-GraphWarning2.SetPoint(12,12,1225)
-GraphWarning2.SetPoint(13,13,1305)
-GraphWarning2.SetPoint(14,14,1400)
-GraphWarning2.SetPoint(15,15,1489)
-
-Xaxis = GraphWarning2.GetXaxis()
-Xaxis.SetLimits(0.,16.)
-GraphWarning2.GetHistogram().SetMaximum(2000.)
-GraphWarning2.GetHistogram().SetMinimum(0.)
-
-GraphWarning2.Draw("AC*")
-outFile.cd()
-GraphWarning2.Write()
-
-
-# -- Canvas warning pixels
-CanvWarningPixels = ROOT.TCanvas("WarningPixels","WarningPixels",400,400)
-CanvWarningPixels.cd()
-
-
-gStyle.SetOptStat("e")
-gStyle.SetStatX(0.9)
-gStyle.SetStatY(0.95)
-
-points6Warning2D.GetZaxis().SetTitleOffset(1.3)
-gPad.SetRightMargin(0.15)
-
-points6Warning2D.Draw("colz")
-list_TLine2=[]
-for i in range(0,25):
-	line_vert =  TLine(i,12,i,48)
-	line_vert.Draw()
-	list_TLine2.append(line_vert)
-
-for i in range(12,49):
-	line_hor =  TLine(0,i,24,i)
-	line_hor.Draw()
-	list_TLine2.append(line_hor)
-	
-gPad.Update()
-
-
-
-CanvWarningPixels.Write()
-
-
+#	
+#
+##CanvGraphPix = TCanvas 
+#
+#GraphWarning = TGraph()
+#GraphWarning.SetPoint(0,0,857)
+#GraphWarning.SetPoint(1,1,925)
+#GraphWarning.SetPoint(2,2,1054)
+#GraphWarning.SetPoint(3,3,1128)
+#GraphWarning.SetPoint(4,4,1214)
+#GraphWarning.SetPoint(5,5,1294)
+#GraphWarning.SetPoint(6,6,1433)
+#GraphWarning.SetPoint(7,7,1500)
+#GraphWarning.SetPoint(8,8,854)
+#GraphWarning.SetPoint(9,9,930)
+#GraphWarning.SetPoint(10,10,853)
+#GraphWarning.SetPoint(11,11,1130)
+#GraphWarning.SetPoint(12,12,1215)
+#GraphWarning.SetPoint(13,13,1294)
+#GraphWarning.SetPoint(14,14,1430)
+#GraphWarning.SetPoint(15,15,1517)
+#
+#Xaxis = GraphWarning.GetXaxis()
+#Xaxis.SetLimits(0.,16.)
+#GraphWarning.GetHistogram().SetMaximum(2000.)
+#GraphWarning.GetHistogram().SetMinimum(0.)
+#
+#GraphWarning.Draw("AC*")
+#outFile.cd()
+#GraphWarning.Write()
+#
+#GraphWarning2 = TGraph()
+#GraphWarning2.SetPoint(0,0,849)
+#GraphWarning2.SetPoint(1,1,925)
+#GraphWarning2.SetPoint(2,2,1020)
+#GraphWarning2.SetPoint(3,3,1094)
+#GraphWarning2.SetPoint(4,4,1225)
+#GraphWarning2.SetPoint(5,5,1300)
+#GraphWarning2.SetPoint(6,6,1406)
+#GraphWarning2.SetPoint(7,7,1500)
+#GraphWarning2.SetPoint(8,8,850)
+#GraphWarning2.SetPoint(9,9,925)
+#GraphWarning2.SetPoint(10,10,1019)
+#GraphWarning2.SetPoint(11,11,1097)
+#GraphWarning2.SetPoint(12,12,1225)
+#GraphWarning2.SetPoint(13,13,1305)
+#GraphWarning2.SetPoint(14,14,1400)
+#GraphWarning2.SetPoint(15,15,1489)
+#
+#Xaxis = GraphWarning2.GetXaxis()
+#Xaxis.SetLimits(0.,16.)
+#GraphWarning2.GetHistogram().SetMaximum(2000.)
+#GraphWarning2.GetHistogram().SetMinimum(0.)
+#
+#GraphWarning2.Draw("AC*")
+#outFile.cd()
+#GraphWarning2.Write()
+#
+#
+## -- Canvas warning pixels
+#CanvWarningPixels = ROOT.TCanvas("WarningPixels","WarningPixels",400,400)
+#CanvWarningPixels.cd()
+#
+#
+#gStyle.SetOptStat("e")
+#gStyle.SetStatX(0.9)
+#gStyle.SetStatY(0.95)
+#
+#points6Warning2D.GetZaxis().SetTitleOffset(1.3)
+#gPad.SetRightMargin(0.15)
+#
+#points6Warning2D.Draw("colz")
+#list_TLine2=[]
+#for i in range(0,25):
+#	line_vert =  TLine(i,12,i,48)
+#	line_vert.Draw()
+#	list_TLine2.append(line_vert)
+#
+#for i in range(12,49):
+#	line_hor =  TLine(0,i,24,i)
+#	line_hor.Draw()
+#	list_TLine2.append(line_hor)
+#	
+#gPad.Update()
+#
+#
+#
+#CanvWarningPixels.Write()
+#
+#
 
 
 
